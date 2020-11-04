@@ -16,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //import pl.coderslab.app.converter.PublisherConverter;
 
+import javax.activation.DataSource;
 import javax.persistence.EntityManagerFactory;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -60,6 +61,7 @@ public class AppConfig implements WebMvcConfigurer {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager(entityManagerFactory);
         return jpaTransactionManager;
     }
+
 
 //    @Bean
 //    public PublisherConverter publisherConverter() {
