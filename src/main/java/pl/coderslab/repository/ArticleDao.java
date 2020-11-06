@@ -5,7 +5,9 @@ import pl.coderslab.entity.Article;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -28,6 +30,11 @@ public class ArticleDao {
 
     public void remove(Article article) {
         entityManager.remove(entityManager.contains(article) ? article : entityManager.merge(article));
+    }
+
+    public List<Article> findAll() {
+        TypedQuery<Article> query = entityManager.createQuery("SELECT a FROM Article a", Article.class);
+        return query.getResultList();
     }
 
 }
