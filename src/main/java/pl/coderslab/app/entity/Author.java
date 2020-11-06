@@ -1,4 +1,4 @@
-package pl.coderslab.entity;
+package pl.coderslab.app.entity;
 
 import javax.persistence.*;
 
@@ -49,5 +49,13 @@ public class Author {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }

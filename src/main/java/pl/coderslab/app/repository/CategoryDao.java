@@ -1,7 +1,7 @@
-package pl.coderslab.repository;
+package pl.coderslab.app.repository;
 
 import org.springframework.stereotype.Repository;
-import pl.coderslab.entity.Category;
+import pl.coderslab.app.entity.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

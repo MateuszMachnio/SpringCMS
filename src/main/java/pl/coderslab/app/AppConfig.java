@@ -14,9 +14,10 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import pl.coderslab.app.converter.AuthorConverter;
+import pl.coderslab.app.converter.CategoryConverter;
 //import pl.coderslab.app.converter.PublisherConverter;
 
-import javax.activation.DataSource;
 import javax.persistence.EntityManagerFactory;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -45,10 +46,11 @@ public class AppConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
-//    @Override
-//    public void addFormatters(FormatterRegistry registry) {
-//        registry.addConverter(publisherConverter());
-//    }
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(authorConverter());
+        registry.addConverter(categoryConverter());
+    }
 
     @Bean
     public LocalEntityManagerFactoryBean entityManagerFactory() {
@@ -62,9 +64,14 @@ public class AppConfig implements WebMvcConfigurer {
         return jpaTransactionManager;
     }
 
+    @Bean
+    public AuthorConverter authorConverter() {
+        return new AuthorConverter();
+    }
 
-//    @Bean
-//    public PublisherConverter publisherConverter() {
-//        return new PublisherConverter();
-//    }
+    @Bean
+    public CategoryConverter categoryConverter() {
+        return new CategoryConverter();
+    }
+
 }

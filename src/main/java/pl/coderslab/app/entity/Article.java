@@ -1,9 +1,9 @@
-package pl.coderslab.entity;
+package pl.coderslab.app.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "articles")
@@ -22,7 +22,7 @@ public class Article {
 
     @OneToMany
     @JoinColumn(name = "article_id")
-    private List<Category> categories = new ArrayList<>();
+    private Set<Category> categories = new HashSet<>();
 
     private String content;
 
@@ -66,11 +66,11 @@ public class Article {
         this.author = author;
     }
 
-    public List<Category> getCategories() {
+    public Set<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
 

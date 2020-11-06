@@ -1,7 +1,8 @@
-package pl.coderslab.repository;
+package pl.coderslab.app.repository;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
-import pl.coderslab.entity.Article;
+import pl.coderslab.app.entity.Article;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,6 +29,11 @@ public class ArticleDao {
         return entityManager.find(Article.class, id);
     }
 
+    public Article findByIdWithCategories(Long id) {
+        Article article = findById(id);
+        Hibernate.initialize(article.getCategories());
+        return article;
+    }
     public void remove(Article article) {
         entityManager.remove(entityManager.contains(article) ? article : entityManager.merge(article));
     }

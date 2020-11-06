@@ -1,10 +1,9 @@
-package pl.coderslab.controller;
+package pl.coderslab.app.controller;
 
-import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.repository.ArticleDao;
+import pl.coderslab.app.repository.ArticleDao;
 
 @Controller
 public class HomePageController {

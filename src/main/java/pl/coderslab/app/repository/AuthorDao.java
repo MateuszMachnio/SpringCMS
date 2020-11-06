@@ -1,8 +1,7 @@
-package pl.coderslab.repository;
+package pl.coderslab.app.repository;
 
-import org.hibernate.annotations.LazyToOne;
 import org.springframework.stereotype.Repository;
-import pl.coderslab.entity.Author;
+import pl.coderslab.app.entity.Author;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
