@@ -2,12 +2,15 @@ package pl.coderslab.app.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.app.entity.Category;
 import pl.coderslab.app.repository.CategoryDao;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/category")
@@ -32,7 +35,10 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    public String adding(Category category) {
+    public String adding(@Valid Category category, BindingResult result) {
+        if (result.hasErrors()) {
+            return "category/add";
+        }
         categoryDao.save(category);
         return "redirect:list";
     }
@@ -44,7 +50,10 @@ public class CategoryController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editing(Category category) {
+    public String editing(@Valid Category category, BindingResult result) {
+        if (result.hasErrors()) {
+            return "category/edit";
+        }
         categoryDao.update(category);
         return "redirect:/category/list";
     }

@@ -3,27 +3,43 @@
 <html>
 <head>
     <title>Edit article</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <form:form modelAttribute="article">
     <form:hidden path="created" />
+    <form:hidden path="id"/>
+
     <form:label path="title">Tytuł: </form:label>
-    <form:input path="title"/><br />
+    <form:input path="title"/>
+    <form:errors path="title" cssClass="error" element="div"/>
+    <br />
 
     <form:label path="content">Zawartość: </form:label>
-    <form:input path="content"/><br />
+    <form:input path="content"/>
+    <form:errors path="content" cssClass="error" element="div"/>
+    <br />
 
     <form:label path="author">Autor: </form:label><br />
     <form:select path="author">
         <form:option value="0" label="--select option--"/>
         <form:options items="${authors}" itemValue="id" itemLabel="firstName"/>
-    </form:select><br />
+    </form:select>
+    <form:errors path="author" cssClass="error" element="div"/>
+    <br />
 
     <form:label path="categories">Kategorie: </form:label><br />
     <form:select path="categories" multiple="true">
-        <form:option value="0" label="--select option--"/>
+        <form:option value="0" label="--select option--" disabled="true"/>
         <form:options items="${categories}" itemLabel="name" itemValue="id"/>
-    </form:select><br />
+    </form:select>
+    <form:errors path="categories" cssClass="error" element="div"/>
+    <br />
+
     <input type="submit" value="Edytuj">
 </form:form>
 </body>

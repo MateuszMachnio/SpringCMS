@@ -25,6 +25,6 @@
         </tr>
     </c:forEach>
 </table>
-<a href="<c:url value="/article/add"/>"><button>Dodaj autora</button></a>
+<a href="<c:url value="/article/add"/>"><button>Dodaj artykół</button></a>
 </body>
 </html>

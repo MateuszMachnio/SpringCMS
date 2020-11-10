@@ -1,8 +1,13 @@
 package pl.coderslab.app.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -13,17 +18,23 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Size(max = 200)
     @Column(nullable = false, length = 200)
     private String title;
 
     @OneToOne
+    @NotNull(message = "Proszę zaznaczyć autora")
     @JoinColumn(name = "author_id")
     private Author author;
 
+    @NotEmpty(message = "Proszę zaznaczyć przynajmniej jedną kategorię")
     @OneToMany
     @JoinColumn(name = "article_id")
     private Set<Category> categories = new HashSet<>();
 
+    @NotNull
+    @Size(min = 150)
     private String content;
 
     @Column(name = "created_on")
@@ -96,5 +107,18 @@ public class Article {
 
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Article article = (Article) o;
+        return id.equals(article.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

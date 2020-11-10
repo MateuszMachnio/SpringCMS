@@ -12,6 +12,9 @@ public class CategoryConverter implements Converter<String, Category> {
 
     @Override
     public Category convert(String s) {
+        if (Long.parseLong(s) <= 0) {
+            return null;
+        }
         return categoryDao.findById(Long.parseLong(s));
     }
 

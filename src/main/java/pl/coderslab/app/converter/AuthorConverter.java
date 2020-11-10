@@ -12,6 +12,9 @@ public class AuthorConverter implements Converter<String, Author> {
 
     @Override
     public Author convert(String s) {
+        if (Long.parseLong(s) <= 0) {
+            return null;
+        }
         return authorDao.findById(Long.parseLong(s));
     }
 

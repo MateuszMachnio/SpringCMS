@@ -2,6 +2,7 @@ package pl.coderslab.app.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.app.entity.Article;
 import pl.coderslab.app.entity.Author;
@@ -10,6 +11,7 @@ import pl.coderslab.app.repository.ArticleDao;
 import pl.coderslab.app.repository.AuthorDao;
 import pl.coderslab.app.repository.CategoryDao;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -49,7 +51,10 @@ public class ArticleController {
     }
 
     @PostMapping("/add")
-    public String adding(Article article) {
+    public String adding(@Valid Article article, BindingResult result) {
+        if (result.hasErrors()) {
+            return "article/add";
+        }
         articleDao.save(article);
         return "redirect:list";
     }
@@ -61,7 +66,10 @@ public class ArticleController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editing(Article article) {
+    public String editing(@Valid Article article, BindingResult result) {
+        if (result.hasErrors()) {
+            return "article/edit";
+        }
         articleDao.update(article);
         return "redirect:/article/list";
     }
