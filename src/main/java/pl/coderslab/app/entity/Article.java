@@ -1,10 +1,11 @@
 package pl.coderslab.app.entity;
 
+import pl.coderslab.app.groupInterfaces.CompleteArticle;
+import pl.coderslab.app.groupInterfaces.DraftArticle;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.GroupSequence;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -12,30 +13,35 @@ import java.util.Set;
 
 @Entity
 @Table(name = "articles")
+//@GroupSequence({CompleteArticle.class, DraftArticle.class, Article.class})
 public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(max = 200)
+    @NotBlank(groups = {CompleteArticle.class, DraftArticle.class})
+    @Size(max = 200, groups = {CompleteArticle.class, DraftArticle.class})
     @Column(nullable = false, length = 200)
     private String title;
 
     @OneToOne
-    @NotNull(message = "Proszę zaznaczyć autora")
+    @NotNull(message = "Proszę zaznaczyć autora", groups = CompleteArticle.class)
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @NotEmpty(message = "Proszę zaznaczyć przynajmniej jedną kategorię")
+    @NotEmpty(message = "Proszę zaznaczyć przynajmniej jedną kategorię", groups = CompleteArticle.class)
     @OneToMany
     @JoinColumn(name = "article_id")
     private Set<Category> categories = new HashSet<>();
 
-    @NotNull
-    @Size(min = 150)
+    @NotNull(groups = {CompleteArticle.class, DraftArticle.class})
+    @Size(min = 50, groups = {CompleteArticle.class, DraftArticle.class})
     private String content;
+
+//    @AssertFalse(groups = Article.class)
+    @AssertTrue(groups = DraftArticle.class)
+    private Boolean draft;
 
     @Column(name = "created_on")
     private LocalDateTime created;
@@ -107,6 +113,14 @@ public class Article {
 
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
+    }
+
+    public Boolean getDraft() {
+        return draft;
+    }
+
+    public void setDraft(Boolean draft) {
+        this.draft = draft;
     }
 
     @Override

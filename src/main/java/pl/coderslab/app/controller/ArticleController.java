@@ -3,10 +3,13 @@ package pl.coderslab.app.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.app.entity.Article;
 import pl.coderslab.app.entity.Author;
 import pl.coderslab.app.entity.Category;
+import pl.coderslab.app.groupInterfaces.CompleteArticle;
+import pl.coderslab.app.groupInterfaces.DraftArticle;
 import pl.coderslab.app.repository.ArticleDao;
 import pl.coderslab.app.repository.AuthorDao;
 import pl.coderslab.app.repository.CategoryDao;
@@ -51,7 +54,19 @@ public class ArticleController {
     }
 
     @PostMapping("/add")
-    public String adding(@Valid Article article, BindingResult result) {
+    public String adding(@Validated(CompleteArticle.class) Article article, BindingResult result) {
+        if (article.getDraft()) {
+            return "forward:addDraft";
+        }
+        if (result.hasErrors()) {
+            return "article/add";
+        }
+        articleDao.save(article);
+        return "redirect:list";
+    }
+
+    @PostMapping("/addDraft")
+    public String addingDraft(@Validated(DraftArticle.class) Article article, BindingResult result) {
         if (result.hasErrors()) {
             return "article/add";
         }

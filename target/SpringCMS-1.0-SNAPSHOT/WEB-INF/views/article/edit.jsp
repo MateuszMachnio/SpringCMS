@@ -24,6 +24,11 @@
     <form:errors path="content" cssClass="error" element="div"/>
     <br />
 
+    <form:label path="draft"/>
+    <form:checkbox path="draft"/>
+    <form:errors path="draft" cssClass="error" element="div"/>
+    <br />
+
     <form:label path="author">Autor: </form:label><br />
     <form:select path="author">
         <form:option value="0" label="--select option--"/>

@@ -11,15 +11,20 @@
 </head>
 <body>
 <h3>Dodaj artykół</h3>
-<form:form modelAttribute="article">
+<form:form modelAttribute="article" >
     <form:label path="title">Tytuł: </form:label>
-    <form:input path="title"/>
+    <form:input path="title" />
     <form:errors path="title" cssClass="error" element="div"/>
     <br />
 
     <form:label path="content">Zawartość: </form:label>
     <form:input path="content"/>
     <form:errors path="content" cssClass="error" element="div"/>
+    <br />
+
+    <form:label path="draft">Draft:</form:label>
+    <form:checkbox path="draft"/>
+    <form:errors path="draft" cssClass="error" element="div"/>
     <br />
 
     <form:label path="author">Autor: </form:label><br />
@@ -31,11 +36,11 @@
     <br />
 
     <form:label path="categories">Kategorie: </form:label><br />
-    <form:select path="categories" multiple="true">
+    <form:select path="categories" multiple="true" >
         <form:option value="0" label="--select option--" disabled="true"/>
         <form:options items="${categories}" itemLabel="name" itemValue="id"/>
     </form:select>
-    <form:errors path="categories" cssClass="error" element="div"/>
+    <form:errors path="categories" cssClass="error" element="div" />
     <br />
 
     <input type="submit" value="Dodaj">
