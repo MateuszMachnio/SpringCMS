@@ -10,7 +10,7 @@
     </style>
 </head>
 <body>
-<form:form modelAttribute="article">
+<form:form modelAttribute="article" method="post" action="/article/edit">
     <form:hidden path="created" />
     <form:hidden path="id"/>
 
@@ -24,7 +24,7 @@
     <form:errors path="content" cssClass="error" element="div"/>
     <br />
 
-    <form:label path="draft"/>
+    <form:label path="draft">Draft: </form:label>
     <form:checkbox path="draft"/>
     <form:errors path="draft" cssClass="error" element="div"/>
     <br />

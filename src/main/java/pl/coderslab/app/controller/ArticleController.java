@@ -56,17 +56,8 @@ public class ArticleController {
     @PostMapping("/add")
     public String adding(@Validated(CompleteArticle.class) Article article, BindingResult result) {
         if (article.getDraft()) {
-            return "forward:addDraft";
+            return "forward:/draft/add";
         }
-        if (result.hasErrors()) {
-            return "article/add";
-        }
-        articleDao.save(article);
-        return "redirect:list";
-    }
-
-    @PostMapping("/addDraft")
-    public String addingDraft(@Validated(DraftArticle.class) Article article, BindingResult result) {
         if (result.hasErrors()) {
             return "article/add";
         }
@@ -80,8 +71,11 @@ public class ArticleController {
         return "article/edit";
     }
 
-    @PostMapping("/edit/{id}")
-    public String editing(@Valid Article article, BindingResult result) {
+    @PostMapping("/edit")
+    public String editing(@Validated(CompleteArticle.class) Article article, BindingResult result) {
+        if (article.getDraft()) {
+            return "forward:/draft/edit";
+        }
         if (result.hasErrors()) {
             return "article/edit";
         }

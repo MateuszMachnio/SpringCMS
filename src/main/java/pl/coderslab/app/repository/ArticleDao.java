@@ -43,6 +43,11 @@ public class ArticleDao {
         return query.getResultList();
     }
 
+    public List<Article> findAllDrafts() {
+        TypedQuery<Article> query = entityManager.createQuery("SELECT a FROM Article a WHERE a.draft = true", Article.class);
+        return query.getResultList();
+    }
+
     public List<Article> getLastFiveArticles() {
         TypedQuery<Article> query = entityManager.createQuery("SELECT a FROM Article a ORDER BY a.created DESC", Article.class);
         query.setMaxResults(5);
