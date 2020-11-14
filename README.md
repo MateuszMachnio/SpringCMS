@@ -1,6 +1,6 @@
 # SpringCMS
 
-###Dzień 1
+### Dzień 1
 Zadanie 1
 Otwórz IDE a następnie utwórz w nim projekt o nazwie SpringCMS.
 Utwórz encje o nazwie Category.
@@ -87,7 +87,7 @@ Formularz tworzenia ma zawierać pola z możliwością wyboru wielu kategorii.
 Dodaj konwertery dla klas Author oraz Category.
 Utwórz linki nawigacyjne umożliwiające przechodzenie między akcjami - bez konieczności znania adresów URL.
 
-###Dzień 3
+### Dzień 3
 
 W ramach pracy domowej rozbudujemy nasz system do zarządzania treścią (CMS - Content Management System).
 

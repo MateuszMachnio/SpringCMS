@@ -15,6 +15,7 @@ import pl.coderslab.app.repository.AuthorDao;
 import pl.coderslab.app.repository.CategoryDao;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
